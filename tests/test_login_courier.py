@@ -53,6 +53,7 @@ class TestLoginCourier:
             assert response.status_code == 404
             assert response.json()['message'] == "Учетная запись не найдена"
 
+    @allure.title("Получение ошибки при попытке авторизоваться без логина")
     def test_login_courier_empty_login_success(self):
         data = {
             "password": 'sprint_7_wrong'
@@ -63,6 +64,7 @@ class TestLoginCourier:
             assert response.status_code == 400
             assert response.json()['message'] == "Недостаточно данных для входа"
 
+    @allure.title("Получение ошибки при попытке авторизоваться без поля с паролем")
     def test_login_courier_empty_password_success(self):
         data = {
             "login": 'ilnazhim'
