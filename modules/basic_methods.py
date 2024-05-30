@@ -27,11 +27,10 @@ def return_login_password():
 
 def login_courier_and_return_id():
     with allure.step("Получение id курьера"):
-        ENDPOINT = '/courier/login'
         data = {
             "login": 'ilnazhim',
             "password": 'sprint_7'
         }
-        response = requests.post(urls.URL + ENDPOINT, data=data)
+        response = requests.post(urls.URL + urls.ENDPOINT_COURIER_LOGIN, data=data)
         assert response.status_code == 200
         return response.json()['id']
