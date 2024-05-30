@@ -11,7 +11,6 @@ class TestCreateOrder:
                                        data_payload.create_order_grey_and_black,
                                        data_payload.create_order_empty_color])
     def test_create_order_success(self, color):
-
         data = color
         with allure.step("Отправка запроса"):
             response = requests.post(urls.URL + urls.ENDPOINT_ORDERS, json=data)
