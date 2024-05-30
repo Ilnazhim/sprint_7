@@ -6,8 +6,8 @@ import requests
 from src import urls
 
 
-with allure.step("Получение рандомного логина, пароля и имени курьера"):
-    def return_login_password():
+def return_login_password():
+    with allure.step("Получение рандомного логина, пароля и имени курьера"):
         def generate_random_string(length):
             letters = string.ascii_lowercase
             random_string = ''.join(random.choice(letters) for _ in range(length))
@@ -26,8 +26,8 @@ with allure.step("Получение рандомного логина, паро
         return payload
 
 
-with allure.step("Получение id курьера"):
-    def login_courier_and_return_id():
+def login_courier_and_return_id():
+    with allure.step("Получение id курьера"):
         ENDPOINT = '/courier/login'
         data = {
             "login": 'ilnazhim',
