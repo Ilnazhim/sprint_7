@@ -3,8 +3,6 @@ import pytest
 import requests
 from src import urls, data_payload
 
-ENDPOINT = '/orders'
-
 
 @allure.suite("Тесты проверки создания заказа")
 class TestCreateOrder:
@@ -16,7 +14,7 @@ class TestCreateOrder:
 
         data = color
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, json=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_ORDERS, json=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 201
             assert response.json()['track'] is not None

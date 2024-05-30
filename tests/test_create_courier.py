@@ -3,8 +3,6 @@ from modules import basic_methods
 import requests
 from src import urls
 
-ENDPOINT = '/courier'
-
 
 @allure.suite("Тесты проверки создания курьера")
 class TestCreateCourier:
@@ -13,7 +11,7 @@ class TestCreateCourier:
 
         data = basic_methods.return_login_password()
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 201
 
@@ -25,7 +23,7 @@ class TestCreateCourier:
             "firstName": 'Пупкин'
         }
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 409
             assert response.json()['message'] == "Этот логин уже используется. Попробуйте другой."
@@ -37,7 +35,7 @@ class TestCreateCourier:
             "login": 'Test0009',
         }
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 400
             assert response.json()['message'] == 'Недостаточно данных для создания учетной записи'
@@ -47,7 +45,7 @@ class TestCreateCourier:
 
         data = basic_methods.return_login_password()
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.content.decode() == '{"ok":true}'
 
@@ -59,7 +57,7 @@ class TestCreateCourier:
             "firstName": 'Васечкин'
         }
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 409
             assert response.json()['message'] == "Этот логин уже используется. Попробуйте другой."

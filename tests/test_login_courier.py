@@ -4,8 +4,6 @@ from modules import basic_methods
 import requests
 from src import urls
 
-ENDPOINT = '/courier/login'
-
 
 @allure.suite("Тесты проверки авторизации курьера")
 class TestLoginCourier:
@@ -16,7 +14,7 @@ class TestLoginCourier:
             "password": 'sprint_7'
         }
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER_LOGIN, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 200
 
@@ -27,7 +25,7 @@ class TestLoginCourier:
             "password": 'sprint_7'
         }
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER_LOGIN, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 200
             assert response.json()['id'] is not None
@@ -36,7 +34,7 @@ class TestLoginCourier:
     def test_login_courier_wrong_login_success(self):
         data = basic_methods.return_login_password()
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER_LOGIN, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 404
             assert response.json()['message'] == "Учетная запись не найдена"
@@ -48,7 +46,7 @@ class TestLoginCourier:
             "password": 'sprint_7_wrong'
         }
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER_LOGIN, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 404
             assert response.json()['message'] == "Учетная запись не найдена"
@@ -59,7 +57,7 @@ class TestLoginCourier:
             "password": 'sprint_7_wrong'
         }
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER_LOGIN, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 400
             assert response.json()['message'] == "Недостаточно данных для входа"
@@ -70,6 +68,6 @@ class TestLoginCourier:
             "login": 'ilnazhim'
         }
         with allure.step("Отправка запроса"):
-            response = requests.post(urls.URL + ENDPOINT, data=data)
+            response = requests.post(urls.URL + urls.ENDPOINT_COURIER_LOGIN, data=data)
         with allure.step("Проверка ожидаемого результата"):
             assert response.status_code == 504
